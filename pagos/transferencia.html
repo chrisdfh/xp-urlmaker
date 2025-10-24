@@ -23,10 +23,9 @@
     //     $persona_cod = $aliado_nropersona;
     // }
 
-    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "https") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     if($error){
         $error_msg="Error de configuración";
-        echo "ERROR".PHP_EOL;
     }
     else{
         $data_enlace=consulta_enlace($url);

@@ -28,12 +28,12 @@
         $error = true;
     }
     
-    $ciaopr = '1';
-    $api_key = 'JNNTl7iZMg6FF9Ow5rmBcfmt7ZJjVlkS';
-    $user_id = 2217; //PARA LA X.....072
-    $api_url = 'https://test-api.xitypay.com';
-    $xpaycta = 'X000000072';
-    $error=false;
+    // $ciaopr = '1';
+    // $api_key = 'JNNTl7iZMg6FF9Ow5rmBcfmt7ZJjVlkS';
+    // $user_id = 2217; //PARA LA X.....072
+    // $api_url = 'https://test-api.xitypay.com';
+    // $xpaycta = 'X000000072';
+    // $error=false;
 
     $options = ["http" => [
         "method" => "GET",
