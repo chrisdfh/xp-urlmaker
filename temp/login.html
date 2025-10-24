@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <base href="..">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <?php
+        include '../controller.php';
+        $aliado_cod = isset($_GET['a'])?$_GET['a']:null;
+        $aliado_cod = '0d7f708fd409cec75b44036fe28998ef';  
+        $persona_cod = '85';
+        $aliado = getAliadoData($aliado_cod,$persona_cod);
+
+    ?>
+
+
+    <?php include '../og.html'; ?>
+
+
+    <!-- MANIFEST -->
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/root.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/styles.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/login.css?v=<?=$FILE_VER?>">
+
+    <script src="./js/md5.js"></script>
+    
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="container-mobile">
+    
+    <?php
+        include '../menu-hamb.html';
+    ?>
+
+    <div class="row px-3 bg-white">
+        <div class="col-12">
+
+            <!-- <div class="d-flex justify-content-between flex-wrap">
+                <div class="boton-pay boton-monto active">
+                    Monto
+                </div>
+                <div class="boton-pay boton-enviar">
+                    Enviar
+                </div>
+                <div class="boton-pay boton-comentar">
+                    Comentar
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row px-3 bg-white g-0 <?= $error ? 'v-hidden' : '' ?>">
+        <div class="col-12">
+                <h5 class="login-header text-center mt-3">
+                    Iniciar Sesión
+                </h5>
+            <form action="javascript:;" onsubmit="login(this)" class="mb-3">
+                <div class="form-group">
+
+                    <div class="label-facturacion mt-3">
+                        Documento de identidad
+                    </div>
+                    <div class="input-group">
+                        <select class="form-select w-25" name="tipnip_usuario" id="tipnip_usuario">
+                            <option value="V" selected>V</option>
+                            <option value="E">E</option>
+                            <option value="J">J</option>
+                        </select>
+                        <input type="text" inputmode="numeric" placeholder="Número de documento" class="form-control w-75" name="codnip_usuario" id="codnip_usuario" required onkeyup="checkInputs()">
+                    </div>
+
+                    <div class="label-facturacion mt-3">
+                        RIF Cliente
+                    </div>
+                    <div class="input-group">
+                        <select class="form-select w-25" name="tipnip_cliente" id="tipnip_cliente">
+                            <option value="V">V</option>
+                            <option value="E">E</option>
+                            <option value="J" selected>J</option>
+                        </select>
+                        <input type="text" inputmode="numeric" placeholder="RIF" class="form-control w-75" name="codnip_cliente" id="codnip_cliente" required  onkeyup="checkInputs()">
+                    </div>
+
+                    <div class="label-facturacion mt-3">
+                        Contraseña
+                    </div>
+                    <input type="password" placeholder="Contraseña" class="form-control" id="password" name="password"  onkeyup="checkInputs()">
+
+
+                    <button type="submit" class="btn-club-blue mt-3" disabled id="btnLogin">
+                        Iniciar Sesion
+                        <div class="spinner-border d-none" id="regSpinner" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </button>
+                </div>
+            </form>
+            <div class="text-center all-standard mb-3">
+                <div class="">
+                    Al iniciar sesión, aceptas nuestros <a target="_blank" href="">Términos y Condiciones</a> y la <a  target="_blank" href="https://www.misrevistas.com/xitymall/notas/23374/politica-de-privacidad">Política de Privacidad</a>
+                </div>
+                <div class="">
+                    Todos los derechos reservados.
+                </div>
+                <div class="">
+                    Copyright© <?= date('Y'); ?> - XityClub.com™
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php include '../footer-faq.html' ?>
+</body>
+
+<script src="./js/script-login.js?v=<?=$FILE_VER?>"></script>
+
+
+
+</html>

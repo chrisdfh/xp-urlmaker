@@ -1,0 +1,364 @@
+<link rel="stylesheet" href="../css/menu-hamb.css?v=<?=$FILE_VER?>">
+<script src="./js/md5.js"></script>
+<div class="row px-3" id="menu">
+    <div class="col-12 ">
+        <div class="top-menu">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <?php if (!$disabled):?>
+                    <a id="go-back" class="p-2 ps-0" href="/pagos/formaenvio.html">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </a>
+                    <?php endif;?>
+                    <div class="logo-xitypay">
+                    <img src="<?=isset($logo_url)?$logo_url:'../assets/img/logo-xitypay.png'?>" alt="Xitypay">
+                    </div>
+                </div>
+                <?php if (!$disabled):?>
+                <div class="bandera d-flex">
+                    <div class="dropdown">
+                        <a class="" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bars"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="showDialog('client-selection')">
+                                    <i class="fa-solid fa-people-arrows"></i>
+                                    Seleccionar Aliado
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="javascript:logout()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <?php endif;?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    #menu .dropdown-item i{
+        width: 25px;
+    }
+</style>
+
+<dialog id="client-selection">
+    <div class="d-flex flex-column">
+        <div class="login-header text-center my-2">
+            Seleccionar Aliado
+        </div>
+        <div class="client-list">
+        </div>
+    </div>
+</dialog>
+
+<template>
+    <div class="client" data-xpnro='' onclick="selectClient(this)">
+        <div class="avatar-cliente-login">
+            <img src="" alt="">
+        </div>
+        <div class="info-cliente-login w-100">
+            <div class="nombre-cliente-login">
+            </div>
+            <div class="xpcta" id=""></div>
+        </div>
+    </div>
+</template>
+
+
+
+<script>
+    function logout() {
+        setCookie("ld", "", -1);
+        setCookie("xpr", "", -1);
+        setTimeout(() => {
+            window.location.href = "/login";
+        },200)
+    }
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function loginSelectionClient(loginData){
+        const template = document.querySelector('template')
+        const clientSelectionList = document.querySelector('.client-list')
+        clientSelectionList.innerHTML = ''
+
+
+
+        if(loginData.usuario.xpaycta.length == 1){
+
+            var rol='U'
+            if (Object.hasOwn(loginData.usuario.xpaycta[0], 'usr_x_cta') && Object.hasOwn(loginData.usuario.xpaycta[0].usr_x_cta, 'rol_1')) {
+                rol = loginData.usuario.xpaycta[0].usr_x_cta.rol_1
+            }
+            const login = {
+                xpayctanro:md5(loginData.usuario.xpaycta[0].xpayctanro),
+                nropersona:loginData.usuario.nropersona,
+                nrousuario:loginData.usuario.nrousuario,
+                xpaycta:loginData.usuario.xpaycta[0].xpayctanro,
+                nombre:loginData.usuario.xpaycta[0].nombre?loginData.usuario.xpaycta[0].nombre:loginData.usuario.xpaycta[0].nombrecorto,
+                cuenta_transitoria:loginData.usuario.xpaycta[0].cuenta_transitoria,
+                rol:rol
+            }
+            setCookie('ld',JSON.stringify(login),1)
+            window.location.href = "/pagos/formaenvio.html"
+        } else {
+            loginData.usuario.xpaycta.forEach((xpaycta)=>{
+                const templateClient = template.content.cloneNode(true)
+                templateClient.querySelector('.avatar-cliente-login img').src = xpaycta.url_avatar1
+                templateClient.querySelector('.nombre-cliente-login').textContent = xpaycta.nombre
+                templateClient.querySelector('.client').dataset.xpnro = xpaycta.xpayctanro
+                templateClient.querySelector('.xpcta').textContent = xpaycta.xpayctanro
+                templateClient.querySelector('.client').dataset.user = loginData.usuario.nropersona
+                templateClient.querySelector('.client').dataset.usuario = loginData.usuario.nrousuario
+                templateClient.querySelector('.client').dataset.nombre = xpaycta.nombre
+                templateClient.querySelector('.client').dataset.cuenta_transitoria = xpaycta.cuenta_transitoria
+                if (Object.hasOwn(xpaycta, 'usr_x_cta') && Object.hasOwn(xpaycta.usr_x_cta, 'rol_1')) {
+                    templateClient.querySelector('.client').dataset.rol = xpaycta.usr_x_cta.rol_1
+                } else {
+                    templateClient.querySelector('.client').dataset.rol = 'U'
+                }
+                clientSelectionList.append(templateClient)
+            })
+            document.querySelector('#client-selection').showModal()
+            document.body.style.overflow = 'hidden'
+        }
+    }
+
+    function selectClient(client){
+
+        const login = {
+            xpayctanro:md5(client.dataset.xpnro),
+            xpaycta:client.dataset.xpnro,
+            nropersona:client.dataset.user,
+            nrousuario:client.dataset.usuario,
+            nombre:client.dataset.nombre,
+            cuenta_transitoria:client.dataset.cuenta_transitoria,
+            rol:client.dataset.rol
+        }
+        setCookie('ld',JSON.stringify(login),1)
+        window.location.href = "/pagos/formaenvio.html"
+    }
+
+
+
+
+// JWT 
+{ 'use strict';
+
+    /**
+     * The code was extracted from:
+     * https://github.com/davidchambers/Base64.js
+     */
+
+    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+    function InvalidCharacterError(message) {
+        this.message = message;
+    }
+
+    InvalidCharacterError.prototype = new Error();
+    InvalidCharacterError.prototype.name = "InvalidCharacterError";
+
+    function polyfill(input) {
+        var str = String(input).replace(/=+$/, "");
+        if (str.length % 4 == 1) {
+            throw new InvalidCharacterError(
+                "'atob' failed: The string to be decoded is not correctly encoded."
+            );
+        }
+        for (
+            // initialize result and counters
+            var bc = 0, bs, buffer, idx = 0, output = "";
+            // get next character
+            (buffer = str.charAt(idx++));
+            // character found in table? initialize bit storage and add its ascii value;
+            ~buffer &&
+            ((bs = bc % 4 ? bs * 64 + buffer : buffer),
+                // and if not first of each 4 characters,
+                // convert the first 8 bits to one ascii character
+                bc++ % 4) ?
+            (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6)))) :
+            0
+        ) {
+            // try to find character in table (0-63, not found => -1)
+            buffer = chars.indexOf(buffer);
+        }
+        return output;
+    }
+
+    var atob = (typeof window !== "undefined" &&
+        window.atob &&
+        window.atob.bind(window)) ||
+    polyfill;
+
+    function b64DecodeUnicode(str) {
+        return decodeURIComponent(
+            atob(str).replace(/(.)/g, function(m, p) {
+                var code = p.charCodeAt(0).toString(16).toUpperCase();
+                if (code.length < 2) {
+                    code = "0" + code;
+                }
+                return "%" + code;
+            })
+        );
+    }
+
+    function base64_url_decode(str) {
+        var output = str.replace(/-/g, "+").replace(/_/g, "/");
+        switch (output.length % 4) {
+            case 0:
+                break;
+            case 2:
+                output += "==";
+                break;
+            case 3:
+                output += "=";
+                break;
+            default:
+                throw new Error("base64 string is not of the correct length");
+        }
+
+        try {
+            return b64DecodeUnicode(output);
+        } catch (err) {
+            return atob(output);
+        }
+    }
+
+    function InvalidTokenError(message) {
+        this.message = message;
+    }
+
+    InvalidTokenError.prototype = new Error();
+    InvalidTokenError.prototype.name = "InvalidTokenError";
+
+    function jwtDecode(token, options) {
+        if (typeof token !== "string") {
+            throw new InvalidTokenError("Invalid token specified: must be a string");
+        }
+
+        options = options || {};
+        var pos = options.header === true ? 0 : 1;
+
+        var part = token.split(".")[pos];
+        if (typeof part !== "string") {
+            throw new InvalidTokenError("Invalid token specified: missing part #" + (pos + 1));
+        }
+
+        try {
+            var decoded = base64_url_decode(part);
+        } catch (e) {
+            throw new InvalidTokenError("Invalid token specified: invalid base64 for part #" + (pos + 1) + ' (' + e.message + ')');
+        }
+
+        try {
+            return JSON.parse(decoded);
+        } catch (e) {
+            throw new InvalidTokenError("Invalid token specified: invalid json for part #" + (pos + 1) + ' (' + e.message + ')');
+        }
+    }
+
+    /*
+    * Expose the function on the window object
+    */
+
+    //use amd or just through the window object.
+    if (window) {
+        if (typeof window.define == "function" && window.define.amd) {
+            window.define("jwt_decode", function() {
+                return jwtDecode;
+            });
+        } else if (window) {
+            window.jwt_decode = jwtDecode;
+        }
+    }
+
+};
+//# sourceMappingURL=jwt-decode.js.map
+//https://github.com/auth0/jwt-decode/blob/main/build/jwt-decode.js
+
+
+    function showDialog(id,isClosable){
+        const dialog = document.getElementById(id)
+        dialog.showModal()
+        if(isClosable){
+            dialog.addEventListener('click', function(event) {
+                var rect = dialog.getBoundingClientRect();
+                var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+                rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+                if (!isInDialog) {
+                    dialog.close();
+                }
+            });
+        }
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (document.querySelector('input#password')===null){
+            // const xprCookie = getCookie('xpr')
+
+            const xprLSlocalStorage = localStorage.getItem("xpr")
+            // if (xprCookie){
+            if (xprLSlocalStorage){
+                // const xpr = jwtDecode(getCookie('xpr'))
+                const xpr = jwtDecode(xprLSlocalStorage)
+                const template = document.querySelector('template')
+                const clientSelectionList = document.querySelector('.client-list')
+                clientSelectionList.innerHTML = ''
+
+                xpr.usuario.xpaycta.forEach((xpaycta)=>{
+                    const templateClient = template.content.cloneNode(true)
+                    var rol = 'U'
+                    if (Object.hasOwn(xpaycta, 'usr_x_cta') && Object.hasOwn(xpaycta.usr_x_cta, 'rol_1')) {
+                        rol = xpaycta.usr_x_cta.rol_1
+                    }
+                    templateClient.querySelector('.avatar-cliente-login img').src = xpaycta.url_avatar1
+                    templateClient.querySelector('.nombre-cliente-login').textContent = xpaycta.nombre
+                    templateClient.querySelector('.client').dataset.xpnro = xpaycta.xpayctanro
+                    templateClient.querySelector('.xpcta').textContent = xpaycta.xpayctanro
+                    templateClient.querySelector('.client').dataset.user = xpr.usuario.nropersona
+                    templateClient.querySelector('.client').dataset.nombre = xpaycta.nombre
+                    templateClient.querySelector('.client').dataset.cuenta_transitoria = xpaycta.cuenta_transitoria
+                    templateClient.querySelector('.client').dataset.rol = rol
+                    clientSelectionList.append(templateClient)
+                })
+            }
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+</script>

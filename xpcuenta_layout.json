@@ -1,0 +1,132 @@
+[
+    {
+        "xpcuenta":"default",
+        "styles":{
+            "headerColor":"white",
+            "headerLogo":"../assets/img/logo-xitypay.png",
+
+            "softBackgroundColor":"#E6EDF2",
+            "softBackgroundTextColor":"#0C4987",
+            "softBackgroundColorAliado":"#fff",
+            "softBackgroundColorUsuario":"#fff",
+
+            "activeButtonColor":"#61a60e",
+            "activeButtonTextColor":"white",
+            "disabledButtonColor":"#d7d7d7",
+            "disabledButtonTextColor":"grey",
+
+            "inputBorderColor":"lightgrey",
+            "inputBorderFocus":"#6f6f6f",
+
+            "accentColor":"#047832",
+
+            "backgroundImage":"https://test-mmedia.xitypay.com/xitypay/X000000072/pec/2559/xityBackground.jpeg",
+
+            "showComisionCheck":true
+        }
+    },
+    {
+        "xpcuenta":"X000000073",
+        "styles":{
+            "headerColor":"#7134e9",
+            "headerLogo":"../assets/img/logo-xitypay.png",
+
+            "softBackgroundColor":"#e6ecf2",
+            "softBackgroundTextColor":"#0C4987",
+            "softBackgroundColorAliado":"#fff",
+            "softBackgroundColorUsuario":"#fff",
+
+            "activeButtonColor":"#7134e9",
+            "activeButtonTextColor":"white",
+            "disabledButtonColor":"#d7d7d7",
+            "disabledButtonTextColor":"grey",
+
+            "inputBorderColor":"lightgrey",
+            "inputBorderFocus":"#6f6f6f",
+
+            "accentColor":"#047832",
+
+            "backgroundImage":"https://test-mmedia.xitypay.com/xitypay/X000000072/pec/2559/xityBackground.jpeg",
+
+            "showComisionCheck":true
+        }
+    },
+    {
+        "xpcuenta":"X000000078",
+        "styles":{
+            "headerColor":"rgb(247,193,0)",
+            "headerLogo":"../assets/img/logo-xitypay.png",
+
+            "softBackgroundColor":"rgb(247,193,0)",
+            "softBackgroundTextColor":"#000",
+            "softBackgroundColorAliado":"#fff",
+            "softBackgroundColorUsuario":"#fff",
+
+            "activeButtonColor":"rgb(247,193,0)",
+            "activeButtonTextColor":"#000",
+            "disabledButtonColor":"#d7d7d7",
+            "disabledButtonTextColor":"grey",
+
+            "inputBorderColor":"lightgrey",
+            "inputBorderFocus":"rgb(212,173,33)",
+
+            "accentColor":"rgb(247,193,0)",
+
+            "backgroundImage":"https://test-mmedia.xitypay.com/xitypay/X000000072/pec/2559/xityBackground.jpeg",
+
+            "showComisionCheck":false
+        }
+    },
+    {
+        "xpcuenta":"X000000079",
+        "styles":{
+            "headerColor":"white",
+            "headerLogo":"../assets/img/logo-xitypay.png",
+
+            "softBackgroundColor":"#E6EDF2",
+            "softBackgroundTextColor":"#0C4987",
+            "softBackgroundColorAliado":"#fff",
+            "softBackgroundColorUsuario":"#fff",
+
+            "activeButtonColor":"#7234E9",
+            "activeButtonTextColor":"white",
+            "disabledButtonColor":"#d7d7d7",
+            "disabledButtonTextColor":"grey",
+
+            "inputBorderColor":"lightgrey",
+            "inputBorderFocus":"#6f6f6f",
+
+            "accentColor":"#7234E9",
+
+            "backgroundImage":"https://test-mmedia.xitypay.com/xitypay/X000000072/pec/2559/xityBackground.jpeg",
+
+            "showComisionCheck":true
+        }
+    },
+    {
+        "xpcuenta":"X000000077",
+        "styles":{
+            "headerColor":"white",
+            "headerLogo":"../assets/img/logo-xitypay.png",
+
+            "softBackgroundColor":"#e5efc4",
+            "softBackgroundTextColor":"#15552b",
+            "softBackgroundColorAliado":"#fff",
+            "softBackgroundColorUsuario":"#fff",
+
+            "activeButtonColor":"#01662A",
+            "activeButtonTextColor":"white",
+            "disabledButtonColor":"#d7d7d7",
+            "disabledButtonTextColor":"grey",
+
+            "inputBorderColor":"lightgrey",
+            "inputBorderFocus":"#6f6f6f",
+
+            "accentColor":"#01662A",
+            
+            "backgroundImage":"https://test-mmedia.xitypay.com/xitypay/X000000077/pec/1544/plaza-bg-s.jpeg",
+
+            "showComisionCheck":false
+        }
+    }
+]

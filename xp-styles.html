@@ -1,0 +1,172 @@
+<style>
+    :root{
+        --color-fondo-menu: <?=$layout->styles->headerColor?>;
+        --color-fondo-faq:white;
+        accent-color: <?=$layout->styles->accentColor?>;
+         --color-borde-superior-seccion-principal: <?=$layout->styles->accentColor?>;
+         
+        /* stepper */
+        --color-activo:<?=$layout->styles->accentColor?>;
+    }
+    button.boton-continuar{
+        background-color: <?=$layout->styles->activeButtonColor?> !important;
+        color: <?=$layout->styles->activeButtonTextColor?> !important;
+        border-radius: 500px;
+    }
+    button:disabled{
+        background-color: <?=$layout->styles->disabledButtonColor?> !important;
+        color:<?=$layout->styles->disabledButtonTextColor?> !important;
+    }
+    .pago-instantaneo-page{
+        box-shadow: none;
+    }
+    .boton-propina.active{
+        background-color: <?=$layout->styles->activeButtonColor?> !important;
+        color: <?=$layout->styles->activeButtonTextColor?> !important;
+    }
+
+    <?php if (isset($bg_url)):?>
+        .container-fluid.main-bg{
+            background-image: url(<?=$bg_url?>);
+            padding-block: 45px;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-height: calc(100vh - 374px);
+        }
+        @media screen and (max-width: 767px) {
+            .container-fluid.main-bg{padding-block:0;}
+        }
+    <?php endif ?>
+
+
+    footer .faq, footer .faq *:not(i):not(.accordion-button),label.big-label{
+        --aptos-font:Roboto,sans-serif;
+        color:#777;
+        font-size: 14px;
+    }
+
+    .sp-top-padding{
+        padding:10px 20px;
+        --aptos-font:Roboto,sans-serif;
+
+        --arialnova-font:Roboto,sans-serif;
+    }
+
+    .concepto-font{
+        font-family: Roboto,sans-serif;
+        font-weight: 300;
+        color: #454545;
+    }
+
+    .nombre-aliado{
+        color:#373737;
+        
+    }
+    .monto-pagar-editable3{
+        border-bottom: none;
+        margin-top: unset;
+    }
+    .monto-placeholder{
+        background-color: <?=$layout->styles->softBackgroundColor?>;
+    }
+
+    .monto-pagar.roboto-font.text-start,
+    .monto-pagar.roboto-font.text-start *{
+        margin-top:0;
+        color:<?=$layout->styles->softBackgroundTextColor?>;
+    }
+
+    .input-group:not(.b-0),
+    .cuadro-input textarea{
+        border:2px solid <?=$layout->styles->inputBorderColor?> !important;
+        padding:7px 5px;
+        border-radius: 15px;
+        transition: border-color 0.3s;
+
+        & select,
+        & input,
+        & select:active,
+        & input:active,
+        & select:focus,
+        & input:focus{
+            border:none !important;
+            box-shadow: none !important
+        }
+    }
+
+
+    input.form-control{
+        border:2px solid <?=$layout->styles->inputBorderColor?>;
+    }
+    input.form-control:focus{
+        box-shadow: none !important;
+        border-color: <?=$layout->styles->inputBorderFocus?>;
+    }
+
+    .input-box{
+        border:2px solid <?=$layout->styles->inputBorderColor?> !important;
+        padding:0 5px 7px 5px;
+        border-radius: 15px;
+    }
+
+
+    .cuadro-input textarea:focus{
+        box-shadow: none !important;
+        border-color: <?=$layout->styles->inputBorderFocus?> !important;
+        
+    }
+
+    .input-group:focus-within{
+        border-color: <?=$layout->styles->inputBorderFocus?> !important;
+    }
+
+    .avatar-aliado{
+        background-color: <?=$layout->styles->softBackgroundColor?>;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 0;
+    }
+    .bg-avatar-usuario{
+        background-color: <?=$layout->styles->softBackgroundColorUsuario?>;
+    }
+    .bg-avatar-aliado{
+        background-color: <?=$layout->styles->softBackgroundColorAliado?>;
+    }
+    .pec-bubble{
+        padding-inline:30px;
+        border-radius: 15px;
+        margin-top:5px;
+    }
+
+    .name-bubble{
+        background-color: <?=$layout->styles->softBackgroundColor?>;
+        color: <?=$layout->styles->softBackgroundTextColor?>;
+        padding:5px;
+        font-weight: 700;
+        border-radius: 15px;
+
+    }
+
+    .avatar-aliado.border-xp img{
+        border:none;
+    }
+    .texto-monto{
+        font-family: 'Open Sans', sans-serif;
+    }
+    .color-texto-monto{
+        color:<?=$layout->styles->softBackgroundTextColor?> !important;
+    }
+    .label-il{
+        margin-left:5px;
+        /* width: 9ch; */
+    }
+    /* #menu .logo-xitypay img{
+        max-height: 60px !important;
+    } */
+
+    .stepper-line{
+        display:none;
+    }
+    
+</style>

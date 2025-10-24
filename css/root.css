@@ -1,0 +1,323 @@
+:root{
+
+    --borde-avatar:1px solid #f90;
+
+    --shadow-componente:0px 0px 5px gray;
+
+    --color-borde-inf-menu: #ededed;
+    --color-fondo-menu:#fff;
+    --color-border-boton-pay: #FC9702;
+    --color-border-boton-pay-activo: #006697;;
+    --radio-boton-pay:4px;
+
+    --color-fondo-primario:rgb(255,153,0);
+    /* #111827;; */
+
+    --radio-avatar-aliado:20px;
+    --max-width-avatar-aliado:110px;
+
+    --color-boton-propina:#fff;
+    --color-texto-boton-propina:#454545;
+    --color-borde-boton-propina:#aaa;
+    --color-boton-propina-activo:rgb(192,0,0);
+    --color-texto-boton-propina-activo:#fff;
+    /* --borde-boton-propina:2px solid var(--color-borde-boton-propina); */
+    --borde-boton-propina:none;
+
+    /* PAGINA PAGAR */
+    --color-boton-pagina:#0000B3;
+    --color-borde-boton-pagina:#aaa;
+    --color-boton-pagina-activo:#FC9702;
+    --color-boton-pagina-deshabilitado:#aaa;
+
+    /* FOOTER */
+    --color-fondo-footer:rgb(17, 24, 39);
+    /* --color-fondo-faq:#ff9900; */
+    --color-fondo-faq:#fff;
+
+    --disabled-text-color:rgb(245,245,245);
+
+    --color-borde-superior-seccion-principal:#FC9702;
+
+    --aptos-font:"Aptos Bold", "Open Sans", sans-serif;
+    --arialnova-font:"ArialNovaCondensed", "Open Sans", sans-serif;
+
+
+
+    --color-inactivo:#ddd;
+    --color-relleno-inactivo:#ddd;
+    /* --color-activo: var(--color-fondo-primario); */
+    --color-activo: #ff9901;
+    --color-texto:#000;
+}
+
+@font-face {
+    font-family: "Aptos Bold";
+    src: url(../assets/fonts/aptos-font/aptos-bold.ttf) format("truetype");
+}
+
+[data-bs-toggle='offcanvas'][href='#footer-faq']{
+    text-align: left !important;
+}
+
+.text-xp-red{
+    color: #da1d00 !important;
+}
+.text-xp-green{
+    color: #007701 !important;
+}
+.text-xp-yellow{
+    color: #ff9901 !important;
+}
+.display-xp-1{
+    font-size: 90px !important;
+}
+
+.rejected_code{
+    font-size: 20px !important;
+    text-transform: uppercase;
+}
+
+.arialnova-font{
+    font-family: var(--arialnova-font);
+}
+
+@font-face {
+    font-family: "ArialNovaCondensed";
+    src: url(../assets/fonts/ArialNovaCond-Bold/ArialNovaCond-Bold.ttf) format("truetype");
+}
+
+*::placeholder{
+    color:rgb(224, 224, 224) !important;
+    
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    /* font-family: "Inter Tight", sans-serif !important; */
+    font-family: var(--aptos-font);
+}
+
+body{
+    /* min-height: 100vh; */
+    /* background-color: black; */
+    /* display:grid; */
+    /* place-content: center; */
+    font-family: 'Open Sans', sans-serif;
+}
+@supports (min-height: 100svh) {
+    body{
+        min-height: 100svh !important;
+    }
+}
+dialog{
+    border:1px solid grey;
+    border-radius: 5px;
+}
+
+.decoration-none{
+    text-decoration: none;
+}
+
+input.no-style,
+select.no-style {
+    color:white;
+    font-weight: bold;
+
+    font-size: 18px !important;
+    font-family: "Inter Tight", sans-serif !important;
+
+
+    outline:none;
+    border:none;
+    background-color: transparent;
+    border-radius: 0;
+    border-bottom: 1px solid darkgray;
+    font-size: 12px;
+
+    padding-bottom:0;
+}
+input.no-style:focus,
+select.no-style:focus {
+    color:white;
+    font-weight: bold;
+    outline:none !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid white !important;
+    box-shadow: none !important;
+}
+
+
+select.no-style option {
+    color: #454545 !important;
+    background-color: white !important;
+}
+
+input.no-style-b,
+select.no-style-b {
+    color:#454545;
+    font-weight: bold;
+
+    font-size: 19px !important;
+    font-family: "Inter Tight", sans-serif !important;
+
+
+    outline:none;
+    border:none;
+    background-color: transparent;
+    border-radius: 0;
+    border-bottom: 1px solid darkgray;
+
+    padding-bottom:0;
+}
+input.no-style-b:focus,
+select.no-style-b:focus {
+    color:#454545;
+    font-weight: bold;
+    outline:none !important;
+    background-color: transparent !important;
+    border-bottom: 1px solid black !important;
+    box-shadow: none !important;
+}
+
+
+select.no-style-b option {
+    color: #454545 !important;
+    background-color: white !important;
+}
+
+dialog input:focus {
+    border-color:unset !important;
+    box-shadow: unset !important;
+}
+
+dialog select.form-select.w-25:focus{
+    border:1px solid black;
+    outline: unset !important;
+    box-shadow: unset !important;
+}
+
+dialog#datos-facturacion input,
+dialog#datos-facturacion select{
+    outline:none;
+    border:none;
+    border-radius: 0px;
+    border-bottom: 1px solid lightgrey;
+
+}
+
+.v-hidden{
+    visibility: hidden;
+}
+
+.form-selec{
+    background-color: #fff;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+    text-align: center;
+}
+.w-30{
+    width: 30% !important;
+}
+.w-70{
+    width: 70% !important;
+}
+
+select:disabled {
+	opacity: 1;
+	background: var(--bs-secondary-bg);
+    /* color:darkgrey; */
+    color:var(--disabled-text-color);
+    background-color: rgba(255,255,255,0.2) !important;
+}
+input:disabled{
+	background: var(--bs-secondary-bg);
+    /* color:darkgrey; */
+    color:var(--disabled-text-color);
+    background-color: rgba(255,255,255,0.2) !important;
+}
+
+.fs-big{
+    font-size: 22px !important;
+}
+.fs-big2{
+    font-size: 16px !important;
+}
+.fs-14{
+    font-size: 14px !important;
+}
+
+.fs-18{
+    font-size: 18px !important;
+}
+
+
+.container-fluid{
+    padding-inline: 0;
+}
+
+img{
+    max-width: 100%;
+}
+
+.lh-12{
+    line-height: 1.2;
+}
+
+.w-max{
+    width: max-content;
+}
+.w-70px{
+    width: 70px;
+}
+.w-100px{
+    width: 100px;
+}
+.w-150px{
+    width: 150px;
+}
+.w-200px{
+    width: 200px;
+}
+.w-250px{
+    width: 250px;
+}
+.w-300px{
+    width: 300px;
+}
+.w-350px{
+    width: 350px;
+}
+
+.dropdown a{
+    text-decoration: none;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+.m0a{
+    margin: 0 auto;
+}
+
+.c-pointer{
+    cursor: pointer;
+}
+
+.bt-0{
+    border-top: none !important;
+}
+.b-0{
+    border: none !important;
+}
+.w-0{
+    width: 0 !important;
+}
+.h-0{
+    height: 0 !important;
+}
+
+.w-0.h-0{
+    padding:0;
+}
+
+.vertical-top{
+    vertical-align: top !important;
+}

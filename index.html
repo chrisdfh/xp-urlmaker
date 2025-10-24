@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<?php
+    include './controller.php';
+        serverInfo();
+
+    $reviews = getReviews();
+?>
+    <base href=".">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XityPay</title>
+
+
+    <!-- MANIFEST -->
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/root.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="../css/index.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/splide-default.min.css">
+
+    <script src="./js/splide.min.js"></script>
+    <script src="./js/index.js?v=<?=$FILE_VER?>" defer></script>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="bg-img">
+            <img class="bg" src="./assets/home/bg.webp" alt="">
+            <img src="./assets/img/logo-xitypay-d.png" alt="" class="brand">
+            <div class="txt-apertura">
+                <div class="text-center">
+                    <div class="titulo">
+                        Revoluciona tus e<span>XP</span>eriencias en los pagos
+                    </div>
+                    <div class="sumario">
+                        Con XityPay, disfruta de transacciones fluidas, sobre una plataforma de vanguardia, que está transformando la forma en que Caracas se conecta y paga en un mundo digital.
+                    </div>
+                    <button class=" mt-4 boton boton-transparente">El futuro es ahora. No esperes más.</button>
+                </div>
+                <img id="arch" src="./assets/home/arch-light.png" alt="">
+            </div>
+            <!-- <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100" xmlns="http://www.w3.org/2000/svg">
+                <path fill="transparent" d="M0 0 C 50 100 50 100 100 00 0" />
+            </svg> -->
+        </div>
+        <div class="seccion-2">
+            <div class="info-seccion-2">
+                <div class="big-pill mt-2 obs">
+                    <div class="pill-titulo obs">
+                        Pagos Móviles Rápidos Ahora
+                    </div>
+                    <div class="pill-sumario obs">
+                        ¡Vuela con tus pagos! Experimenta la velocidad de XityPay.
+                        <ul class="pill-lista">
+                            <li>Tus compras, más inteligentes. Tus pagos, más rápidos</li>
+                            <li>Eleva tu experiencia de compra: rápido, seguro y sencillo.</li>
+                        </ul>
+                        <p>Con XityPay puedes cobrar y pagar de forma fácil y rápida, con un código QR, con WhatsApp, o como quieras. Incluso si eres una empresa. Porque XityPay también está habilitada para ser usada por las empresas. </p>
+                        <p>XityPay hace que cobrar y pagar sea súper fácil para todos.</p>
+                    </div>
+                    <button class="boton boton-blanco mt-3 obs">Pagos rápidos</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion-3">
+            <div class="info-seccion-3">
+                <div class="s3-velo"></div>
+                <div class="pre-titulo mb-3 z-2 p-rel obs">
+                    Innovación constante - A prueba de futuro
+                </div>
+                <div class="s-titulo mb-4 z-2 p-rel obs">
+                    Innovación en la punta de los dedos
+                </div>
+                <div class="row z-2 p-rel">
+                    <div class="col-12 col-md-4 gap-4">
+                        <div class="nota-tercio obs">
+                            <div class="nt-titulo">
+                                Pensando en los clientes
+                            </div>
+                            <div class="nt-sumario">
+                                Dando prioridad a las necesidades de nuestros aliados y usuarios, para brindar experiencias de pago agradables.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota-tercio obs">
+                            <div class="nt-titulo">
+                                Confianza y seguridad
+                            </div>
+                            <div class="nt-sumario">
+                                XityPay es una plataforma confiable y segura. Los clientes pagan con confianza y seguridad desde sus propios bancos.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota-tercio obs">
+                            <div class="nt-titulo">
+                                Simple e Intuitiva
+                            </div>
+                            <div class="nt-sumario">
+                                Creamos experiencias digitales sencillas y agradables para todos.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seccion-4">
+
+            <div class="info-seccion-4">
+                <div class="pre-titulo mb-3 obs">
+                    Transacciones Sencillas
+                </div>
+                <div class="s-titulo mb-4 obs">
+                    Pagos inteligentes - Sin complicaciones
+                </div>
+                <div class="s-sumario mb-4 obs">
+                    Gestiona transacciones sin esfuerzo con nuestras soluciones de pago móvil fáciles de usar, garantizando un procesamiento seguro y rápido.
+                </div>
+                <div class="row gy-4">
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img1.webp" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    Compras integradas sin complicaciones
+                                </div>
+                                <div class="in-sumario">
+                                    Transacciones rápidas y seguras directamente en la plataforma para una experiencia de usuario más fluida.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img2.jpg" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    La tecnología al alcance de todos
+                                </div>
+                                <div class="in-sumario">
+                                    Una solución intuitiva, con una experiencia de usuario fluida y sencilla, para todos los usuarios, sin importar su edad o experiencia.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img3.webp" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    Seguimiento en tiempo real
+                                </div>
+                                <div class="in-sumario">
+                                    Recibe actualizaciones y alertas instantáneas sobre todas tus transacciones para garantizar transparencia y control.
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img4.webp" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    Soluciones de pagos personalizadas
+                                </div>
+                                <div class="in-sumario">
+                                    Personaliza la experiencia de pago para satisfacer tus necesidades comerciales únicas y las preferencias de tus clientes.
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img5.webp" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    Avanzada Protección Antifraude
+                                </div>
+                                <div class="in-sumario">
+                                    Usando tecnologías de seguridad de vanguardia para protegerse contra transacciones no autorizadas.
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                    <div class="col-12 col-md-4">
+                        <div class="nota obs">
+                            <div class="bg-nota">
+                                <img src="./assets/home/img6.webp" alt="">
+                            </div>
+                            <div class="info-nota">
+                                <div class="in-titulo">
+                                    Expresión en varias divisas
+                                </div>
+                                <div class="in-sumario">
+                                    Expresión de las transacciones en múltiples las monedas a la que estás acostumbrado.
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="seccion-2">
+            <div class="info-seccion-2">
+                <div class="big-pill mt-2 obs">
+                    <div class="row">
+                        <div class="col-12 col-md-7">
+                            <div class="pill-titulo obs">
+                                ¿Cómo funciona XityPay?
+                            </div>
+                            <div class="pill-sumario">
+                                <ol class="pill-lista">
+                                    <li class="obs">
+                                        Crea una solicitud de pago
+                                        <div>
+                                            Crea un Xity, establece el monto, la vigencia y agrega los detalles, como el concepto y un número de factura.
+                                        </div>
+                                    </li>
+                                    <li class="obs">Comparte la solicitud de pago
+                                        <div>
+                                            Envía tus Xitys a través de WhatsApp, de un correo, o deja que tus clientes paguen a través de un código QR.
+                                        </div>
+                                   </li>
+                                    <li class="obs">Pago seguro y confiable
+                                        <div>
+                                            Los clientes pagan de forma rápida y segura a través de su propio banco. No necesitan descargar o instalar ninguna aplicación.
+                                        </div>
+                                   </li>
+                                    <li class="obs">Recibe pagos al instante
+                                        <div>
+                                            El 80% paga incluso en 1 día. Todos los pagos van directamente y de una sola vez a tu cuenta. 
+                                        </div>
+                                   </li>
+                                    <li class="obs">Consulta los pagos cómodamente
+                                        <div>
+                                            Puedes ver inmediatamente, directamente en tu teléfono o tu computador, quién ha pagado y quién no, con cómodos filtros de búsqueda.
+                                        </div>
+                                   </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <div class="pic-placeholder pt-3 pt-md-0">
+                                <img src="https://mmedia.misrevistas.com/XTC/archivos/xitypay-clubbg.png" alt="">
+                            </div>
+
+
+                            <style>
+                                .pill-lista div{
+                                    line-height: 1.2;
+                                    margin-bottom: 7px;
+                                }
+                                .pic-placeholder img{
+                                    aspect-ratio: unset;
+                                    object-fit: cover;
+                                    width: 100%;
+                                    border-radius: 25px;
+                                }
+                                .pic-placeholder {
+                                    height: 100%;
+                                    display: grid;
+                                    align-items: center;
+                                }
+                                @media screen and (min-width: 768px) {
+                                    
+                                    .pic-placeholder img{
+                                        aspect-ratio: 9/16;
+                                    }
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="seccion-5">
+            <div class="s5-velo"></div>
+            <div class="info-seccion-5">
+                <div class="row p-rel z-1">
+                    <div class="col-12 col-md-6">
+                        <div class="data-seccion-5">
+                            <div class="">
+                                <div class="titulo obs">
+                                    Acerca de nosotros
+                                </div>
+                                <p class="obs">
+                                    En XityPay, desde la vibrante ciudad de Caracas, estamos revolucionando la forma en que las personas realizan transacciones con nuestra plataforma de pagos móviles de última generación. Nuestra misión es ofrecer una experiencia de pago sin complicaciones, segura y eficiente.
+                                </p>
+                                <p class="obs">
+                                    Con un enfoque en la innovación y la satisfacción del cliente, XityPay aprovecha la tecnología más reciente para garantizar que cada transacción sea rápida y protegida. Únete a nosotros mientras lideramos la transformación de los pagos digitales.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="side-image obs">
+                            <img src="./assets/home/img3.webp" alt="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="seccion-6">
+            <div class="info-seccion-6">
+                <div class="pre-titulo mb-3 obs">
+                    Confianza a toda prueba
+                </div>
+                <div class="s-titulo mb-4 obs">
+                    Comentarios reales de usuarios satisfechos
+                </div>
+                <div class="s-sumario mb-4 obs">
+                    Esta plataforma revolucionó nuestro proceso de pago. Rápida, segura y extremadamente fácil de usar. Un antes y un después para las empresas en Caracas.
+                </div>
+
+                <div class="splide carousel-comentarios obs">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            <?php foreach ($reviews as $key => $review) : ?>
+                                <li class="splide__slide">
+                                    <div class="comment-pill">
+                                        <div class="avatar-comment">
+                                            <img src="<?=$review->img?>" alt="">
+                                        </div>
+                                        <div class="txt-comment">
+                                            <?=$review->review?>
+                                        </div>
+                                        <div class="firma-comment">
+                                            <?=$review->firma?>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <div class="txt-footer">
+            <img src="./assets/img/logo-xitypay-d.png" alt=""> Todos los derechos reservados
+        </div>
+    </footer>
+    
+
+<script>
+    var splideReviews = new Splide( '.carousel-comentarios', {
+        type   : 'loop',
+        lazyLoad: 'nearby',
+        perPage: 2,
+        gap:'15px',
+        perMove: 1,
+        autoplay:true,
+        breakpoints: {
+            1024: {
+                perPage: 2
+            },
+            640: {
+                perPage: 1
+            }
+        }
+    })
+
+    splideReviews.mount()
+</script>
+
+</body>
+</html>

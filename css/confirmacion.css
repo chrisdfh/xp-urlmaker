@@ -1,0 +1,46 @@
+.msg-enviado{
+    /* font-family: 'Open Sans', sans-serif; */
+    /* font-weight: 500; */
+}
+/*
+<i class="fa-solid fa-star"></i>
+
+*/
+
+/*
+<i class="fa-regular fa-star"></i>
+*/
+
+
+.porta-estrellas{
+    font-size:18px;
+    gap:10px;
+    align-items: center;
+}
+textarea.text-area{
+    max-height: 0px;
+    min-height: 0px;
+    height: 0px;
+    visibility: hidden;
+    transition: 0.3s;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+}
+
+textarea[open]{
+    height: auto;
+    max-height: 100px;
+    min-height: 100px;
+    visibility: visible;
+}
+
+textarea::placeholder{
+    color:grey !important;
+    font-weight: 400 !important;
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 10px;
+}
+
+.msg-enviado{
+    font-size: 16px !important;
+}

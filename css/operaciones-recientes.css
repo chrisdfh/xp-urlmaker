@@ -1,0 +1,205 @@
+.pago-button{
+    margin:5px;
+    border:1px solid lightgrey;
+    border-radius: 5px;
+    padding-block:5px;
+    padding-inline:10px;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom:5px;
+    justify-content: space-between;
+    box-shadow: 2px 2px 3px lightgrey;
+}
+.pago-button.ok{
+    border-left:7px solid green;
+}
+.pago-button .left{
+    gap:10px;
+    width: 65%;
+    word-wrap: anywhere;
+}
+.pago-button.error{
+    border-left:7px solid red;
+}
+.pago-button .img-avatar img{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.pago-button *{
+    line-height: 1.2;
+    color:#454545
+}
+
+.pago-button .concepto{
+    color:grey;
+}
+.pago-button .nombre{
+    margin-top:2px;
+}
+.pago-button .fecha{
+    font-weight: 400;
+    color:grey;
+    font-size: 10px;
+    margin-top:2px;
+}
+.pago-button .monto{
+    font-weight: 900;
+    font-size: 14px;
+    text-align: right;
+}
+.pago-button .estatus{
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+.pago-button .estatus.ok{
+    color:green
+}
+.pago-button .estatus.error{
+    color:red
+}
+.m0a{
+    margin:0 auto;
+}
+
+form#transaction-form{
+    transition: 0.3s;
+    max-height: 0px;
+    overflow: hidden;
+}
+form#transaction-form.open{
+    max-height: 115px;
+}
+.activar-filtro{
+    cursor: pointer;
+    color:blue;
+}
+.link-listado{
+    cursor: pointer;
+    color:blue;
+    text-decoration: none;
+
+
+    display: flex;
+    gap:5px;
+    align-items: center;
+}
+
+
+/*DATO MODAL*/
+.modal-content .modal-body{
+    max-height: 80svh;
+    overflow-y: auto;
+}
+.modal-content .icon-transaction{
+    font-size: 60px;
+    text-align: center;
+
+    &.ok{
+        color:lightgreen;
+    }
+    &.error{
+        color:lightcoral;
+    }
+}
+
+.modal-content img{
+    width: 25px;
+    aspect-ratio: 1/1;
+    margin-right:15px;
+}
+.modal-content     table *{
+    color: #454545;
+}
+
+.modal-content     table tr{
+    display:flex;
+}
+.modal-content     table.table-transaccion {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.modal-content     table.table-transaccion td:first-of-type{
+    width: 40%;
+    color:rgb(55, 55, 180) !important;
+    padding:5px 5px 0 0;
+    flex-shrink: 0;
+}
+.modal-content     table.table-transaccion td:last-of-type{
+    color:#454545 !important;
+    padding:5px 0px 0 0;
+    font-weight: 600;
+    display: grid;
+    align-content: end;
+    word-wrap: anywhere;
+}
+.w-tipnip{
+    width: 180px;
+}
+.table.personas-en-cuenta>:not(caption)>*>* {
+    padding:0.2rem 0.5rem;
+}
+.font-small *{
+    font-size: 14px;
+}
+
+.modal-content{
+    border-radius: 7px;
+
+    /* & .modal-body{
+        max-height: 80svh;
+        overflow-y: scroll;
+    }
+
+    & .icon-transaction{
+        font-size: 60px;
+        text-align: center;
+
+        &.ok{
+            color:lightgreen;
+        }
+        &.error{
+            color:lightcoral;
+        }
+    } */
+/* 
+    & img{
+        width: 25px;
+        aspect-ratio: 1/1;
+        margin-right:15px;
+    } */
+
+    /* table *{
+        color: #454545;
+    }
+
+    table tr{
+        display:flex;
+    } */
+
+    /* table.table-transaccion {
+        width: 90%;
+        margin: 0 auto;
+
+        & td:first-of-type{
+            width: 40%;
+            color:rgb(55, 55, 180) !important;
+            padding:5px 5px 0 0;
+            flex-shrink: 0;
+        }
+        & td:last-of-type{
+            color:#454545 !important;
+            padding:5px 0px 0 0;
+            font-weight: 600;
+            display: grid;
+            align-content: end;
+            word-wrap: anywhere;
+        }
+    }; */
+}

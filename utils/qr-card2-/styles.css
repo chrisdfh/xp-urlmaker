@@ -1,0 +1,13 @@
+@font-face {
+    font-family: HPSimplified;
+    src: url(./fonts/HPSimplifiedRegular.woff);
+}
+@font-face {
+    font-family: HPSimplifiedBold;
+    src: url(./fonts/HPSimplifiedBold.woff);
+}
+@font-face {
+    font-family: HPSimplifiedLight;
+    src: url(./fonts/HpSimplifiedLight.woff);
+}
+

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es-VE">
+<head>
+    <base href="..">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php   
+    include '../controller.php';
+
+    $aliado_cod = isset($_GET['a'])?$_GET['a']:null;
+    $aliado_cod = '0d7f708fd409cec75b44036fe28998ef';  
+    $persona_cod = '85';
+    $aliado = getAliadoData($aliado_cod,$persona_cod);
+
+    $xpayctanro = $aliado->xpayctanro;
+
+    $rate = getRate()->value;
+
+
+?>
+
+    <title>Solicitud de Transferencia</title>
+
+    <!-- MANIFEST -->
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/root.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/styles.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/enviolote.css?v=<?=$FILE_VER?>">
+
+    <!-- JS -->
+    <script src="./js/script-transferencia.js?v=<?=$FILE_VER?>"></script>
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+<div class="container-mobile">
+    
+    <?php
+        include '../menu-hamb.html';
+    ?>
+
+    <div class="row px-0">
+        <div class="col-12">
+            <div class="mt-2">
+                <?php if (!$error) : ?>
+                    <div class="seccion-ml">
+                        <div class="title-seccion-ml lh-12 mt-3">
+                            Solicitud de Transferencia
+                        </div>
+                        <div class="body-seccion-ml p-2">
+                            <form action="/temp/solicitudenviada.html" method="post">
+                                <div class="row align-items-end">
+
+                                <input type="text" class="d-none nc" name="tipo_enlace" value="I">
+                                <input type="text" class="d-none nc" name="xpayctanro" value="<?=$xpayctanro?>">
+                                <input type="text" class="d-none nc" name="nrousuario" value="<?=$persona_cod?>">
+
+                                <div class="col-12">
+                                    <div class="cuadro-input">
+                                        <label for="monto" class="label-seccion-ml">
+                                            Monto
+                                            <div class="d-flex gap-3">
+                                                <div class="txt">Especificar monto</div>
+                                                <div class="d-flex gap-1">
+                                                    <label for="montosi">Si:</label>
+                                                    <input class="d-block monto-radio" type="radio" name="lleva_monto" value="S" id="montosi" checked>
+                                                </div>
+
+                                                <div class="d-flex gap-1">
+                                                    <label for="montono">No:</label>
+                                                    <input class="d-block monto-radio" type="radio" name="lleva_monto" value="N" id="montono">
+                                                </div>
+                                                
+                                                <div class="d-flex gap-1">
+                                                    <label for="abiertocheck">Abierto:</label>
+                                                    <input class="d-block" type="checkbox" name="monto_modificable" id="abiertocheck">
+                                                </div>
+                                           
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="cuadro-input">
+                                        <div class="input-group">
+                                            <input id="monto" name="monto" type="text" inputmode="numeric" class="form-control" placeholder="" onkeyup="setMontoRate(this)"> 
+                                            <input name="monto-final" type="text" class="d-none" id="monto-final">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 pe-1">
+                                    <input type="radio" name="moneda" data-value="vef" value="vef" id="vef" checked>
+                                    <label class="button-label sm" for="vef">Bs.</label>
+                                </div>
+                                <div class="col-3 ps-1">
+                                    <input type="radio" name="moneda" data-value="usd" value="usd" id="usd">
+                                    <label class="button-label sm" data-value="usd" for="usd">$</label>
+                                </div>
+                                <div class="col-12">
+                                    <div class="tasa-del-dia d-none">
+                                        Tasa BCV del día Bs. <?=$rate?>
+                                    </div>
+                                </div>
+
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Teléfono Celular
+                                            </label>
+                                            <div class="input-group">
+                                                <select name="codtel" id="codtel" class="form-select w-25">
+                                                    <option value="0412">0412</option>
+                                                    <option value="0414">0414</option>
+                                                    <option value="0424">0424</option>
+                                                    <option value="0416">0416</option>
+                                                    <option value="0426">0426</option>
+
+                                                </select>
+                                                <input name="telefono" type="text" inputmode="tel" class="form-control w-75" placeholder="XXXXXXX" maxlength="7" minlength="7" required>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Correo
+                                            </label>
+                                            <div class="input-group">
+                                                <input name="email_notificacion" type="email" inputmode="email" class="form-control" placeholder="correo@dominio.com" required>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Concepto
+                                            </label>
+                                            <textarea placeholder="Por concepto de..." class="form-control" name="concepto" id="concepto" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Referencia del aliado
+                                            </label>
+                                            <div class="input-group">
+                                                <input oninput="let p = this.selectionStart; this.value = this.value.toUpperCase();this.setSelectionRange(p, p);" name="referencia" id="referencia" type="text" class="form-control" placeholder="123456ABCDE" required>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Fecha de Envío
+                                            </label>
+                                            <div class="input-group">
+                                                <input name="fchemision" type="date" class="form-control" placeholder="DD / MM / YYYY">
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-6">
+
+                                        <div class="cuadro-input">
+                                            <label class="label-seccion-ml">
+                                                Fecha de Caducidad
+                                            </label>
+                                            <div class="input-group">
+                                                <input name="fchcaducidad" type="date" class="form-control" placeholder="DD / MM / YYYY">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-12 mt-4">
+                                        <div class="text-center">
+                                            <button class="boton-continuar" id="enviarLote" >Generar y enviar <span></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                             </form>
+                        </div>
+                    </div>
+                <?php else :?>
+                    <p>Url inválido, por favor verifique e intente nuevamente</p>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<?php
+    include '../footer-faq.html';
+?>
+<script>
+    setDefaults({r: <?=$rate?>})
+</script>
+</body>
+</html>

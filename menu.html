@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="../css/menu.css?v=<?=$FILE_VER?>">
+<div class="row px-3" id="menu">
+    <div class="col-12 ">
+        <div class="top-menu">
+            <div class="d-flex justify-content-between">
+                <div class="logo-xitypay">
+                    <img src="<?=isset($logo_url)?$logo_url:'../assets/img/logo-xitypay.png'?>" alt="Xitypay">
+                </div>
+                <div class="bandera d-flex">
+                    <div class="bandera-txt">
+                        Expresado en:
+                    </div>
+
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="select-currency" data-currency="vef" src="../assets/img/venezuela.svg" alt="Bandera de Vzla">
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-currency">
+                            <li data-currency="vef"><a class="dropdown-item currency-item"  data-currency="vef" >
+                                <div class="moneda-txt">
+                                    Bs.
+                                </div>
+                                <img src="../assets/img/venezuela.svg"alt="Bandera de Vzla">
+                            </a></li>
+                            <li  data-currency="usd"><a class="dropdown-item currency-item" data-currency="usd">
+                                <!-- <img src="../assets/img/usa2.svg"  alt="Bandera de EEUU"> -->
+                                <div class="moneda-txt">
+                                    $
+                                </div>
+                                <img src="../assets/img/usd.webp"  alt="Dolares">
+                            </a></li>
+                        </ul>
+                    </div>
+
+
+                    <script>
+
+                    </script>
+
+
+<!-- 
+                    <img src="../assets/img/venezuela.svg" alt="Bandera de Vzla">
+                    <img src="../assets/img/usa2.svg" alt="Bandera de EEUU"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

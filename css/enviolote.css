@@ -1,0 +1,104 @@
+/* .seccion-ml{ */
+    /* border:2px solid black; */
+    /* padding:20px; */
+    /* border-radius: 20px; */
+/* } */
+
+.seccion-ml .title-seccion-ml{
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.seccion-ml input,
+.seccion-ml textarea,
+.seccion-ml select{
+    font-family: var(--aptos-font);
+    font-size: 16px;
+}
+.seccion-ml input:disabled,
+.seccion-ml textarea:disabled,
+.seccion-ml select:disabled{
+    background:var(--bs-secondary-bg) !important;
+    color:darkgrey;
+}
+
+.seccion-ml *::placeholder{
+    color:rgb(162, 162, 162) !important;
+}
+label.label-seccion-ml{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left:10px;
+}
+.cuadro-input{
+    margin-top:5px;
+}
+label.tip{
+    font-size: 12px;
+    padding-left:100px;
+}
+.qr-placeholder img{
+    width: 350px;
+    display: block;
+    margin: 10px auto;
+    border:1px solid lightgrey;
+    border-radius: 5px;
+
+}
+label.button-label{
+    height: 36.5px;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    background: white;
+    color:#454545;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding:5px;
+    line-height: 1.1;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.2s;
+    border:1px solid lightgrey;
+    
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+label.button-label.sm{
+    height: 52px !important;
+    margin-top:5px;
+}
+
+input[type="radio"]{
+    display: none;
+}
+input.button-label[type="checkbox"]{
+    display: none;
+}
+
+input:checked + label.button-label{
+    background: #070;
+    color:white;
+    border:1px solid #070;
+}
+
+button.boton-continuar:disabled{
+    background: lightgrey;
+    color:grey;
+}
+.label-seccion-ml.label-il {
+    width: 70px;
+}
+#codtel{
+    width: 14ch;
+    flex-grow: 0;
+    flex-shrink: 0;
+}

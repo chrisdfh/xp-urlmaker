@@ -1,0 +1,163 @@
+POST https://persona.patria.org.ve/persona-search
+
+{
+    "V": "V15631160"
+}
+
+
+###
+
+POST https://micropersona.xityclub.com/aliadowrap/1
+
+{
+    "ciaopr":"1",
+    "nroaliado":64
+}
+
+####
+
+
+### Solicitar OTP
+POST https://xitypay.com/api/otp/1/X000000001
+content-type: application/json
+
+{
+  "debitor_document_info": {
+    "type": "V",
+    "number": "15631160"
+  },
+  "debitor_account": {
+    "bank_code": "0105",
+    "type": "CELE",
+    "number": "04123344516"
+  },
+  "amount": {
+    "amt": 5,
+    "currency": "VES"
+  }
+}
+
+### Enviar transacción
+POST https://xitypay.com/api/send/otp/1/X000000001
+content-type: application/json
+
+{
+  "amount": {
+    "amt": 10.5,
+    "currency": "VES"
+  },
+  "nropersona":1475,
+  "correo_pagador":"correo@servidor.com",
+  "concept": "Test Xityclub",
+  "receiving_user": {
+    "otp": "abcdef",
+    "document_info": {
+      "type": "V",
+      "number": "15631160"
+    },
+    "account": {
+      "bank_code": "0105",
+      "type": "CELE",
+      "number": "04122841442"
+    }
+  }
+}
+
+### enviar transaccion
+POST https://xitypay.com/api/send/otp/1/X000000001
+
+{
+  "amount":{
+    "amt":206.25,
+    "currency":"VES"
+  },
+  "concept":"Propina",
+  "receiving_user":{
+    "otp":"12..23",
+    "document_info":{
+      "type":"V",
+      "number":"15631160"
+    },
+  "account":{
+    "bank_code":"0105",
+    "type":"CELE",
+    "number":"04122841442"
+    }
+  }
+}
+
+### WebHook
+POST https://xitypay.com/api/webhook/X000000001
+
+{
+   "internal_id":"XP00000010",
+   "transaction_id":"000000000000",
+   "ref_ibp":"00000000", 
+   "group_id":"0",
+   "amount":{
+      "type":"NONE",
+      "amt":5,
+      "pay_amt":5,
+      "currency":"VES",
+      "rate":36
+   },
+   "receiving_user":{
+      "name":"Carlos Yépez",
+      "otp":"12345678",
+      "phone":{
+         "area_code":"+58",
+         "number":"4123344516"
+      },
+      "email":"comunicacioneselalazan@gmail.com",
+      "document_info":{
+         "type":"V",
+         "number":"15160559"
+      },
+      "account":{
+         "bank_code":"9999",
+         "type":"CNTA",
+         "number":"99990378913972665525"
+      }
+   },
+   "status":"ACCP",
+   "rejected_code":""
+}
+
+###
+
+### Obtiene información de un aliado a través de su xpayctanro
+GET https://xitypay.com/api/aliado/1/X000000001
+
+
+###
+### Obtiene información de un aliado a través de su xpayctanro y la persona receptora del pago
+GET https://xitypay.com/api/xpay_cta_pers/1/02e3bbdc28f826c8e464868d539786db/85
+
+
+
+###
+POST https://xitypay.com/api/link_cobro/1
+
+{
+  "ciaopr":"1",
+  "xpayctanro":"X000000003",
+  "nrousuario":85,
+  "genera_factura":"N",
+  "enviado_a_tlf":"N",
+  "enviado_a_mail":"N",
+  "lleva_monto":"S",
+  "monto":1,
+  "monto_modificable":"S",
+  "concepto":"concepto de pago",
+  "referencia":"REFERENCIA",
+  "fchemision":"2024-09-06-0400:00:00-04:00",
+  "fchcaducidad":"2024-09-13-0400:00:00-04:00",
+  "email_notificacion":"chrisdfh@gmail.com",
+  "nro_sms_notificacion":"04122841442",
+  "nro_ws_notificacion":"04122841442"
+} 
+
+
+#####
+
+GET https://xitypay.com/api/link_cobro/1/71ba71c62a48b7b762a301241cfcf01a

@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="modal fade" id="personaEnCuentaModal" tabindex="-1" aria-labelledby="personaEnCuentaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header py-1">
+        <h1 class="modal-title fs-5" id="personaEnCuentaModalLabel">Personas en cuenta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-1">
+        <div class="row-filtro">
+          <div class="row g-1">
+            <div class="col-3">
+              <label for=""><small>Doc. ID</small></label>
+              <input type="text" class="form-control" id="idPersEnCuentaModal" >
+            </div>
+            <div class="col-8">
+              <label for=""><small>Nombre</small></label>
+              <input type="text" class="form-control" id="nombrePersEnCuentaModal">
+            </div>
+            <div class="col-1">
+              <label for="">&nbsp;</label>
+              <button class="boton-continuar" id="botonBuscarConFiltro">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <table class="table personas-en-cuenta w-100 color-black table-striped" id="tablaPersonasEnCuenta">
+          <thead class="thead thead-light">
+            <tr>
+              <th class="w-tipnip">Doc. ID</th>
+              <th class="w-100">Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table> 
+      </div>
+      <div class="modal-footer py-1 justify-content-between">
+        <div class="font-small">
+          <button class="boton-continuar" id="btnPrevModal">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <button class="boton-continuar" disabled>Pág <span id="pagModal"></span>/<span id="pagsModal"></span></button>
+
+          <button class="boton-continuar"id="btnNextModal">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  table.color-black th,
+  table.color-black td{
+    color:#454545 !important;
+  }
+</style>

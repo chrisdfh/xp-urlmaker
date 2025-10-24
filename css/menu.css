@@ -1,0 +1,49 @@
+
+#menu{
+    border-bottom: 2px solid var(--color-borde-inf-menu);
+    background-color: var(--color-fondo-menu);
+    width: 100%;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+}
+#menu .bandera{
+    margin-block: auto;
+}
+#menu .bandera img{
+    /* max-height: 25px; */
+    max-width: 37px;
+    object-fit: fill;
+}
+#menu .bandera img.select-currency{
+    max-height: 25px;
+    width: 37px;
+    object-fit: contain;
+}
+#menu .bandera .bandera-txt{
+    font-size: 0.6em;
+    text-wrap: nowrap;
+    font-weight: bold;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#menu .logo-xitypay{
+    padding-block:5px;
+}
+#menu .logo-xitypay img{
+    max-height: 80px;
+    object-fit: contain;
+}
+.currency-item{
+    display:flex;
+}
+.currency-item .moneda-txt{
+    width: 32px;
+    display: flex;
+    align-items: center;
+}
+.dropdown-menu.dropdown-currency{
+    min-width: 100px;
+}

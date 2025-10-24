@@ -1,0 +1,120 @@
+<body>
+    <div class="special-container">
+        <div class="fondo-imagen text-center ">
+            <img src="<?=$bg_img?>" alt="" class="bg">
+
+
+
+            <?php if (!$error):?>
+
+            <div class="qrcode">
+                <img src="" alt="">
+            </div>
+            <div class="info-top">
+                <!-- <div class="logo-xp">
+                    <img src="../../assets/img/icons/icon-256x256.png" alt="Xitypay">
+                </div>
+                <div class="texto-xp">
+                    xitypay
+                </div> -->
+                <div class="nombre-aliado-sup">
+                    <?=$aliado->cuenta->nombrecorto?>
+                </div>
+                <div class="nombre-persona-sup">
+                    <!-- <?=$aliado->persona->nombrecorto?> -->
+                     <?=$aliado->cta_titular_nombre?>
+                </div>
+                <div class="rif-persona-sup">
+                    <?php if ($aliado->persona->tipnip == 'V' || $aliado->persona->tipnip == 'E'):?>
+                        <?=$aliado->persona->tipnip ?>-<?=number_format($aliado->persona->codnip,0,'','.')?>
+                    <?php else:?>
+                        <?=$aliado->persona->tipnip ?>-<?=$aliado->persona->codnip?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="info-bottom">
+                <div class="texto-aliado d-none">
+                    <div class="palabra">
+                        ALIADO
+                    </div>
+                    <div class="nombre-aliado">
+                        <?=$aliado->nombre?>
+                    </div>
+                    <div class="nombre-persona">
+                        <!-- <?=$aliado->persona->nombrecorto?> -->
+                        <?=$aliado->cta_titular_nombre?>
+                    </div>
+                    <div class="rif-aliado">
+                        RIF: <?=$aliado->rif?>
+                    </div>
+                </div>
+            </div>
+
+            <?php else:;?>
+            <div class="absolute-center">
+                HUBO UN ERROR CON SU SOLICITUD
+            </div>
+            <?php endif;?>
+
+            <div class="marca-identificacion">
+                <i class="fa-solid fa-circle"></i>
+                <i class="fa-solid fa-circle"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        async function getQr(url_qr,hash_ctanro,nropersona) {
+            if (url_qr && url_qr != '') {
+                console.log('usando url_qr')
+                document.querySelector('.qrcode img').src = url_qr
+                return url_qr
+            }
+            const url = 'https://www.xitypay.com/api/qr_url/1'
+            data={
+                size: 256,
+                // url_logo: "https://mmedia.misrevistas.com/XTC/archivos/assets/xpay-icon-wbg.png",
+                url: `${xitypayUrl}/${hash_ctanro}/pago?pid=${nropersona}`,
+                solid_logo: false
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const blob = await response.blob();
+            document.querySelector('.qrcode img').src = URL.createObjectURL(blob)
+        }
+        getQr('<?=$aliado->url_qr2?>','<?=$aliado_hash?>',<?=$nropersona?>)
+
+            // alert (ratio)
+
+        function zoom(){
+            const size = screen.width * window.devicePixelRatio
+            if (screen.width < 540) {
+                const ratio = screen.width / 540;
+                document.body.style.transformOrigin = "0px 0px 0px";
+                document.body.style.height = screen.width*16/9;
+                document.body.style.transform = `scale(${ratio})`;
+            } else {
+                document.body.style.transformOrigin = "";
+                document.body.style.height = "";
+                document.body.style.transform = `scale(1)`;
+
+            }
+        }
+        zoom()
+
+        window.addEventListener('resize',zoom)
+        window.addEventListener('orientationchange',zoom)
+        window.addEventListener('load',zoom)
+        window.addEventListener('scroll',zoom)
+
+
+
+    </script>
+</body>

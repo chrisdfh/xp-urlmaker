@@ -1,0 +1,17 @@
+[
+    {
+        "img":"./assets/home/ac-1.webp",
+        "review":"XityPay ha revolucionado mis trámites en caja. Es tan sencillo como tocar una pantalla y ¡listo! La seguridad es impecable, lo que me permite agilizar mis transacciones con total tranquilidad. ¡No más colas ni efectivo! Definitivamente, ha simplificado nuestra vida.",
+        "firma":"Luis Vivas"
+    },
+    {
+        "img":"./assets/home/ac-2.webp",
+        "review":"Desde que uso XityPay, los pagos de mis clientes se han vuelto una experiencia mucho más agradable. XityPay es intuitiva y súper rápida. Además, la variedad de opciones de cobro me permite elegir la que mejor se adapte a mis necesidades. Sin duda, es la mejor decisión que he tomado para gestionar mis cobros.",
+        "firma":"Carlos Rivas"
+    },
+    {
+        "img":"./assets/home/ac-3.webp",
+        "review":"Usar XityPay ha cambiado las reglas del juego para mí en Caracas. Es rápido, seguro y simplifica mi vida financiera al mantener todas las transacciones de pagos de mis clientes al alcance de su mano. Me encanta lo fácil que es hacer los pagos en cualquier lugar y en cualquier momento.",
+        "firma":"Miguel Torres"
+    }
+]

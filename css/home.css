@@ -1,0 +1,7 @@
+body{
+    background-color: white !important;
+    display: grid;
+    place-content: center;
+    height: 100svh;
+    background: linear-gradient(to bottom, white 80%, rgb(197, 197, 197));
+}

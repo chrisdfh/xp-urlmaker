@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es-VE">
+<head>
+    <base href="..">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php   
+        include '../controller.php';
+        serverInfo();
+        // $rate = getRate()->value;
+
+        $xpayctanro = (isset($_POST['xpayctanro']) && $_POST['xpayctanro'] != '') ? $_POST['xpayctanro'] : null;
+        $genera_factura = (isset($_POST['genera_factura']) && $_POST['genera_factura'] != '') ? $_POST['genera_factura'] : 'N';
+        $lleva_monto = (isset($_POST['lleva_monto']) && $_POST['lleva_monto'] != '') ? $_POST['lleva_monto'] : 'off';
+        $monto_final = (isset($_POST['monto-final']) && $_POST['monto-final'] != '') ? $_POST['monto-final'] : null;
+        $monto = (isset($_POST['monto']) && $_POST['monto'] != '') ? $_POST['monto'] : null;
+        $concepto = (isset($_POST['concepto']) && $_POST['concepto'] != '') ? $_POST['concepto'] : null;
+        $referencia = (isset($_POST['referencia']) && $_POST['referencia'] != '') ? $_POST['referencia'] : null;
+        $fchemision = (isset($_POST['fchemision']) && $_POST['fchemision'] != '') ? $_POST['fchemision'] : null;
+        $fchcaducidad = (isset($_POST['fchcaducidad']) && $_POST['fchcaducidad'] != '') ? $_POST['fchcaducidad'] : null;
+        $nrousuario = (isset($_POST['nrousuario']) && $_POST['nrousuario'] != '') ? $_POST['nrousuario'] : null;
+        $nropersona = (isset($_POST['nropersona']) && $_POST['nropersona'] != '') ? $_POST['nropersona'] : null;
+        $email_notificacion = (isset($_POST['email_notificacion']) && $_POST['email_notificacion'] != '') ? $_POST['email_notificacion'] : null;
+        $cod_tel     = (isset($_POST['codtel']) && $_POST['codtel'] != '') ? $_POST['codtel'] : '-';
+        $telefono    = (isset($_POST['telefono']) && $_POST['telefono'] != '') ? $_POST['telefono'] : '-';
+        $monto_modificable = (isset($_POST['monto_modificable']) && $_POST['monto_modificable'] != '') ? $_POST['monto_modificable'] : null;
+        $nombre_aliado = (isset($_POST['nombre_aliado']) && $_POST['nombre_aliado'] != '') ? $_POST['nombre_aliado'] : null;
+        $moneda = (isset($_POST['moneda']) && $_POST['moneda'] != '') ? strtoupper($_POST['moneda']) : 'VES';
+
+        $send_email = (isset($_POST['sbm']) && $_POST['sbm'] != '') ? $_POST['sbm'] : null;
+        $send_ws = (isset($_POST['ws']) && $_POST['ws'] != '') ? $_POST['ws'] : null;
+
+        if ($send_ws == 'on') {
+            $ws = true;
+        }
+
+        if ($moneda=='VEF')$moneda='VES';
+
+        $fchemision_fix = date('Y-m-d\TH:i:s-04:00', strtotime($fchemision));
+        $fchcaducidad_fix = date('Y-m-d\TH:i:s-04:00', strtotime($fchcaducidad));
+        $monto_modificable_fix = $monto_modificable == 'on' ? 'S' : 'N';
+        $lleva_monto_fix = $lleva_monto == 'on' ? 'S' : 'N';
+
+        $data = array(
+            "ciaopr"=> $ciaopr,
+            "xpayctanro"=>$xpayctanro,
+            "nrousuario"=>intval($nrousuario),
+            "nropersona"=>intval($nropersona),
+            "genera_factura"=>$genera_factura,
+            "enviado_a_tlf"=>'N',
+            "enviado_a_mail" => 'N',
+            "lleva_monto" => $lleva_monto_fix,
+            "monto"=> floatval($monto),
+            "monto_modificable"=> $monto_modificable_fix,
+            "tipo_enlace"=>"I",
+            "concepto"=>$concepto,
+            "referencia"=>$referencia,
+            "fchemision"=>$fchemision_fix,
+            "fchcaducidad"=>$fchcaducidad_fix,
+            "email_notificacion"=>$email_notificacion,
+            "nro_sms_notificacion" => "$cod_tel$telefono",
+            "nro_ws_notificacion" => "$cod_tel$telefono",
+            "enviar_notificacion_email"=> false,
+            "enviar_notificacion_ws"=> true,
+            "moneda" => $moneda
+        );
+
+        $resp = enviarSolicitud($data);
+
+        // $resp = (Object) array (
+        //     "ciaopr"=>"1",
+        //     "linknro"=>"PL00000000006851",
+        //     "xpayctanro"=>"X000000072",
+        //     "genera_factura"=>"N",
+        //     "lleva_monto"=>"S",
+        //     "monto_modificable"=>"N",
+        //     "tipo_enlace"=>"I",
+        //     "enviado_a_tlf"=>"N",
+        //     "enviado_a_mail"=>"N",
+        //     "monto"=>5,
+        //     "moneda"=>"VES",
+        //     "concepto"=>"De Freitas Christian XP - Pago inmediato",
+        //     "referencia"=>"1757942819660",
+        //     "fchemision"=>"2025-09-15T09:27:00-04:00",
+        //     "fchcaducidad"=>"2025-10-27T01:27:00-04:00",
+        //     "estatus_link"=>"A",
+        //     "linkhash"=>"98d0a3be5b364540049e92833f44c118",
+        //     "nrousuario"=>2218,
+        //     "link_url"=>"https://test.xitypay.com/pago/98d0a3be5b364540049e92833f44c118",
+        //     "email_notificacion"=>"chrisdfh@gmail.com",
+        //     "nro_sms_notificacion"=>"04122841442",
+        //     "nro_ws_notificacion"=>"04122841442",
+        //     "nropersona"=>1544,
+        //     "enviar_notificacion_email"=>true,
+        //     "enviar_notificacion_ws"=>true
+        // );
+
+        $moneda_simbolo='';
+        switch ($moneda) {
+            case 'VES':
+                $moneda_simbolo = 'Bs.';
+                break;
+            case 'USD':
+                $moneda_simbolo = '$';
+                break;
+            default:
+                $moneda_simbolo = 'Bs.';
+                break;
+        }
+
+        $mensaje_ws =   "Usted ha recibido un enlace de cobro de $nombre_aliado por concepto de $concepto. Para hacer una transferencia instantánea haga clic en el siguiente enlace: %0a%0a".$resp->link_url;
+
+        $error = true;
+        $error_msg = '';
+        if (isset($resp->link_url)) {
+            if ($telefono == '-' || $cod_tel == '-'){
+                $telefono = '';
+                $send_ws = 'off';
+            } else {
+                $telefono = '58'.str_replace('0', '', $cod_tel) .$telefono;
+            }
+
+            $error = false;
+            $ws_link = 'https://wa.me/'. $telefono .'?text='.$mensaje_ws;
+        } else {
+            $error = true;
+            $error_msg = $resp->mensaje;
+        }
+
+
+        // if($send_ws == 'on' && $error == false){
+        //     echo "<script>window.location.href = '$ws_link';</script>";
+        // }
+
+
+        $layout = getLayout(json_decode($jwt_active)->active_xpaycta->xpayctanro);
+        if ($layout){
+            $logo_url = json_decode($jwt_active)->active_xpaycta->url_avatar1;
+            $bg_url = $layout->styles->backgroundImage;
+        }
+        
+    ?>
+    <title>Solicitud Enviada</title>
+
+    <!-- MANIFEST -->
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/root.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/styles.css?v=<?=$FILE_VER?>">
+    <link rel="stylesheet" href="./css/enviolote.css?v=<?=$FILE_VER?>">
+
+    <script src="./js/util.js?v=<?=$FILE_VER?>"></script>
+
+    <?php if (isset($layout->styles)){
+        include '../xp-styles.html';
+    } ?>
+    <style>
+        body{
+                grid-template-rows: 1fr auto;
+                display: grid;
+        }
+
+        .caja-monto {
+            display: inline-block;
+            /* border: 1px solid grey; */
+            padding: 5px 20px;
+            border-radius: 10px;
+            outline: none;
+            background: <?=$layout->styles->softBackgroundColor?> !important;
+            color: <?=$layout->styles->softBackgroundTextColor?>
+        }
+
+        .btn-share {
+            /* width: 250px; */
+            /* max-width: 75%; */
+            margin: 7px auto;
+            /* padding: 20px; */
+        }
+       .button-label {
+            background: #fff;
+            /* color: white; */
+            border: 1px solid lightgray !important;
+            width: 100%;
+        }
+       .button-label:focus {
+            background: <?=$layout->styles->softBackgroundColor?> !important;
+            /* color: white; */
+            color: #454545 !important;
+            border: 1px solid #454545 !important;
+        }
+
+        .button-label-sp {
+            padding: 15px !important;
+            height: unset !important;
+            font-size: 16px;
+            /* justify-content: start; */
+            /* display: flex; */
+            place-content: center start !important;
+            border-radius: 15px !important;
+        }
+        .button-label-sp>.d-flex{
+            gap: 15px;
+            align-items:center ;
+        }
+        .imagen-boton-compartir i{
+            font-size: 25px;
+        }
+        .imagen-boton-compartir{
+            position: relative;
+            top:2px;
+        }
+        .txt-boton-compartir{
+            font-weight: normal;
+            font-size: 13px;
+            text-align: left;
+        }
+
+
+
+
+
+        .modal-qr-img-container {
+            width: 200px;
+            margin:0 auto;
+        }
+        .boton-continuar-blanco {
+            background-color: white;
+            border: 1px solid var(--color-boton-propina-activo);
+            color: var(--color-boton-propina-activo);
+        }
+        .divider>.row>.col{
+            height: 5px;
+        }
+        .divider>.row>.col:nth-child(4){
+            background-color:#fd9a00 ;
+        }
+        .divider>.row>.col:nth-child(3){
+            background-color:#da1d00 ;
+        }
+        .divider>.row>.col:nth-child(2){
+            background-color:#007701 ;
+        }
+        .divider>.row>.col:nth-child(1){
+            background-color:#006696 ;
+        }
+        .modal-qr-name{
+            font-size: 12px;;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container-fluid main-bg">
+
+<div class="container-mobile">
+    
+    <?php
+        include '../menu-hamb.html';
+    ?>
+
+    <div class="row px-0">
+        <div class="col-12">
+            <div class="mt-2">
+                <?php if (!$error) : ?>
+                    
+                    <div class="text-center pb-0">
+                        <div class="title-seccion-ml lh-12 h6 mb-0">
+                            Su solicitud de pago ha sido generada
+                        </div>
+                        <div class="title-seccion-ml lh-12 h4 mb-0">
+                            Escoja su método de envío
+                        </div>
+                    </div>
+
+                    <div class="text-center py-3">
+                        <div class="caja-monto">
+                            <div class="fw-bold display-6">
+                                <?=$moneda_simbolo?> <?=number_format($resp->monto, 2,',','.')?>
+                            </div>
+
+                            <div class="small">
+                                <?=$resp->concepto?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-5" id="alert-placeholder"></div>
+                    <div class="row m-0 gy-0 gx-3 px-3">
+                        <div class="col-6">
+                            <div class="btn-share">
+                                <button class="button-label button-label-sp" onClick="btnCase('show-qr')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-solid fa-qrcode"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Mostrar QR
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="btn-share">
+                                <button class="button-label button-label-sp" onClick="btnCase('copy-qr')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-regular fa-copy"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Copiar Enlace
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-6">
+                            <div class="btn-share">
+                                <button class="button-label button-label-sp"   onClick="btnCase('send-ws')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Enviar por WhatsApp
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+        
+                            <div class="btn-share">
+                                <button class="button-label button-label-sp"  onClick="btnCase('share-email')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-regular fa-envelope"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Enviar por Correo
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="btn-share">
+                                <button class="button-label button-label-sp"  onClick="btnCase('share-sms')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-regular fa-message"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Enviar por SMS
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="btn-share" id="menu-share-button">
+                                <!-- <input type="radio" class="" name="share" id="share-menu" value="share-menu"> -->
+                                <button for="share-menu" class="button-label button-label-sp" onClick="btnCase('share-link')">
+                                    <div class="d-flex">
+                                        <div class="imagen-boton-compartir">
+                                            <i class="fa-solid fa-share-nodes"></i>
+                                        </div>
+                                        <div class="txt-boton-compartir">
+                                            Compartir Enlace
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="botonera text-center my-3" id="back-button">
+                                <button class="boton-continuar">
+                                    Regresar
+                                </button>
+                            </div>
+
+                            <div class="tasa-del-dia color-azul-principal fw-semibold c-pointer mb-3 px-4" data-bs-toggle="offcanvas" href="#footer-faq">
+                                <i class="fa-regular fa-circle-question pe-2"></i> <div class="d-inline">Preguntas Frecuentes</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                    <!-- MODAL QR -->
+                    <div class="modal fade" id="qrModall" tabindex="-1" aria-labelledby="qrModallLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered w-max m0a">
+                        <div class="modal-content">
+                        <div class="modal-header border-0 pb-0">
+                            <h1 class="modal-title fs-5" id="qrModallLabel">QR Pago</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body pb-2">
+                            <div class="modal-qr-img-container">
+                                <img id="modal-qr-img" src="" alt="">
+                            </div>
+                            <div class="modal-txt-info text-center pb-2 d-none">
+                                <div class="modal-qr-name">
+                                    <span class="fw-bold">NOMBRE: </span><span></span>
+                                </div>
+                                <div class="modal-qr-name">
+                                    <span class="fw-bold">IDENTIFICACIÓN: </span><span></span>
+                                </div>
+                                <div class="modal-qr-name">
+                                    <span class="fw-bold">TELÉFONO: </span><span></span>
+                                </div>
+                                <div class="modal-qr-name overflow-x-auto w-250px">
+                                    <a href="<?=$resp->link_url?>">Link</a>
+                                </div>
+                            </div>
+
+                            <div class="divider">
+                                <div class="row">
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pt-0 justify-content-center">
+                            <button type="button" class="boton-continuar boton-continuar small" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="boton-continuar boton-continuar-blanco small" onclick="shareMenu('XityPay', 'Recibiste un enlace de pago','<?=$resp->link_url?>') ">Compartir</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                <?php else :?>
+                    <p>Hubo un error al enviar la solicitud, por favor verifique e intente nuevamente</p>
+                    <p><?=$error_msg?></p>
+                <?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+    
+<?php
+    include '../footer-faq.html';
+?>
+
+<script>
+    document.querySelector('#back-button').addEventListener('click',()=>{
+        window.location.href = './pagos/formaenvio.html';
+    })
+
+    async function genQr(url,elementId){
+        const element = document.getElementById(elementId);
+        const btn = document.getElementById('btn-qr-code');
+        const genUrl = 'https://www.xitypay.com/api/qr_url/1'
+        data={
+            size: 256,
+            url,
+            solid_logo: false
+        }
+
+        const response = await fetch(genUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        if (response.status != 200) {
+            console.log('error al generar qr')
+            return
+        }
+        const blob = await response.blob();
+        element.src = URL.createObjectURL(blob)
+    }
+
+    function shareMenu(title, msg, url){
+        navigator.share({
+            title: title,
+            text: msg,
+            url: url
+        }).then(() => console.log('Link compartido'))
+        .catch(error => console.log('Error al compartir', error));
+    }
+
+    window.onload = () => {
+        if (navigator.share && !navigator.canShare({title:'',url:'',text:''})){
+            document.getElementById('menu-share-button').remove()
+        }
+    }
+
+
+    function btnCase(btnCase){
+        switch (btnCase) {
+            case 'show-qr':
+                showQr()    
+                break;
+            case 'send-ws':
+                window.open('https://wa.me/<?=$telefono?>?text=<?=$mensaje_ws?>', '_blank');
+                break;
+            case 'share-email':
+                window.open('mailto:<?=$resp->email_notificacion?>?subject=<?=$resp->concepto?>&body=<?=$mensaje_ws?>', '_blank');
+                break;
+            case 'share-sms':
+                window.open('sms:<?=$telefono?>;?&body=<?=$mensaje_ws?>')
+                break;
+            case 'share-link':
+                shareMenu('XityPay', 'Recibiste un enlace de pago por <?=$resp->concepto?>', '<?=$resp->link_url?>');
+                break;
+            case 'copy-qr':
+                copyClipbpard('<?=$resp->link_url?>');
+                break;
+        }
+    }
+
+    function copyClipbpard(text){
+        navigator.clipboard.writeText(text)
+        .then(() => {
+            bsAlert('Enlace copiado al portapapeles<br> <a target="_blank" href="<?=$resp->link_url?>">Abrir enlace en pestaña nueva</a>','success')
+        }).catch(err => {
+            bsAlert('Error al copiar al portapapeles','danger')
+            console.log(err)
+        })
+    }
+
+    function bsAlert(msg, type){
+        const alertPlaceholder = document.getElementById('alert-placeholder')
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${msg}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+        ].join('')
+        alertPlaceholder.append(wrapper)
+        // setTimeout(() => {
+        //     wrapper.remove()
+        // }, 5000)
+    }
+
+    function showQr(){
+        const modalQr = new bootstrap.Modal(document.getElementById('qrModall'));
+        genQr('<?=$resp->link_url?>','modal-qr-img')
+        modalQr.show();
+    }
+    
+
+</script>
+
+<!-- <script src="./js/script-enviolote.js?v=<?=$FILE_VER?>"></script> -->
+</body>
+</html>

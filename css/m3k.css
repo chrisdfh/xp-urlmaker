@@ -1,0 +1,23 @@
+.marquee3k a {
+    text-decoration: none;
+    color: #000;
+}
+.marquee3k .mk-wrapper{
+    font-family(--arialnova-font);
+    white-space: nowrap;
+    border-top:1px solid var(--color-fondo-primario);
+    font-size:16px;
+
+}
+.marquee3k__copy {
+    display:inline-block;
+    padding-inline: 25px;
+    box-sizing: border-box;
+}
+.marquee3k img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display:inline-block;
+    padding-inline: 5px;
+}
